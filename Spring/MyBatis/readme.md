@@ -15,7 +15,7 @@
 
 - Spring Boot란 Spring 프레임워크를 편리하게 사용할 수 있도록 지원하는 `도구`입니다.
 - 왜 사용하나요? why❓
-  스프링 부트는 Spring의 $\color{ff69b4}{\textsf{복잡한 설정을 자동화}}$하고,
-  바로 실행 가능한 $\color{ff69b4}{\textsf{애플리케이션}}$을 만들 수 있게 해줍니다.
+  - 스프링 부트는 Spring의 $\color{ff69b4}{\textsf{복잡한 설정을 자동화}}$ 하고,
+  - 바로 실행 가능한 $\color{ff69b4}{\textsf{애플리케이션}}$ 을 만들 수 있게 해줍니다.
 
 ---
