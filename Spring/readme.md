@@ -186,6 +186,7 @@ public class OrderServiceImpl implements OrderService {
     * **역할:** 이 (Entry Point를 포함한)클래스가 애플리케이션의 **메인 설정 클래스('의미 상')**임을 선언합니다.
     * **특징:** 스프링의 기존 `@Configuration`과 기능이 100% 동일하여 <span style="color: #27ae60;"><b>내부에서 등록한 `@Bean` 객체들을 완벽한 싱글톤(Singleton)으로 유지 및 관리</b></span>해 줍니다. (생성은 스프링의 빈 메서드,생성 및 주입은 스프링의 역할)
     * **존재 이유:** 테스트 환경(`@SpringBootTest`) 실행 시, 애플리케이션의 시작점을 자동으로 추적하기 위한 **이름표(Marker)** 역할을 합니다.
+    * 테스트환경에서는 추적이 필요(junit 테스트할 때는 서버에서 코드 안돌아가니까, 추적이 필요)
 
 * **`@ComponentScan`**
     * **오해와 진실:** 스캔하면서 주입(Injection)을 같이 해주는 것이 **아닙니다!**
