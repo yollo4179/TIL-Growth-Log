@@ -44,7 +44,7 @@
   </li>
   <hr>
   <li>
-    <strong>@Configuration:</strong> 개발자가 직접 자바 코드로 빈(Bean)을 등록하고 싶을 때 사용합니다.
+    <strong>@Configuration +@Bean:</strong> 개발자가 직접 자바 코드로 빈(Bean)을 등록하고 싶을 때 사용합니다. (Service:@Configuration, 멤버:@Bean)
   </li>
   <hr>
   <li>
@@ -153,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
 <strong><span style="color: #639922;">Spring Boot (버전)</span></strong> : 프로젝트의 뼈대가 될 스프링 부트 버전을 선택합니다.
 <ul>
 <li><strong>SNAPSHOT :</strong> 현재 활발히 개발 중인 버전 (불안정할 수 있음)</li>
-<li><strong>M (Milestone) :</strong> <i>(※ 자료의 Minor는 Milestone의 오기입일 확률이 높습니다.)</i> 정식 릴리즈 전 단계의 마일스톤 버전. 추가로 <strong>RC (Release Candidate)</strong>라는 정식 배포 직전의 후보 버전도 있습니다.</li>
+<li><strong>Milestone :</strong>  정식 릴리즈 전 단계의 마일스톤 버전. 추가로 <strong>RC (Release Candidate)</strong>라는 정식 배포 직전의 후보 버전도 있습니다.</li>
 <li><strong>아무것도 안 붙은 것 (GA) :</strong> 정식 릴리즈된 안정적인 버전입니다. 💡 <span style="color: #E24B4A;"><strong>항상 정식 릴리즈된 버전 중 최신 버전을 선택하는 것이 가장 좋습니다!</strong></span></li>
 </ul>
 </li>
@@ -171,33 +171,65 @@ public class OrderServiceImpl implements OrderService {
 <strong>Dependencies</strong> : 프로젝트에 필요한 라이브러리(Spring Web, Lombok, Data JPA 등)를 미리 선택하여 주입합니다.
 </li>
 </ul>
+# 🚀 Spring Boot 핵심 동작 원리 & 애너테이션 완벽 가이드
 
-💡 Tip: 강의에서는 "WEB에서 생성하지 않고 STS에서 생성하자"고 하셨는데, 이는 STS 내부에 Spring Initializr API가 연동되어 있어서 굳이 브라우저를 켜고 zip 파일을 다운로드 후 압축 해제하는 번거로운 과정을 생략할 수 있기 때문입니다.
+이 문서는 Spring Boot를 구성하는 핵심 애너테이션들의 역할과, 의존성(Library)이 물리적인 메모리에 올라가기까지의 **'마법 같은 자동화'** 과정을 C++의 링킹(Linking) 개념과 비교하여 정리한 내용입니다.
 
-2. ✨ 메인 클래스의 심장: @SpringBootApplication
-스프링 부트 프로젝트를 생성하면 만들어지는 메인 실행 클래스에는 <img src="https://img.shields.io/badge/@SpringBootApplication-378ADD?style=flat-square"> 이라는 어노테이션이 붙어 있습니다. 이것은 사실 3가지 핵심 어노테이션이 하나로 합쳐진 콤보 패키지입니다.
+---
 
-자료에 손글씨로 적혀있던 **"DI(의존성 주입)"**라는 키워드는 아주 중요합니다. 아래의 스캔 및 자동 설정 과정을 통해 객체들이 Bean으로 등록되어야만 비로소 스프링이 DI를 해줄 수 있기 때문입니다.
+## 1. 🎯 스프링 부트의 심장: 핵심 애너테이션
 
-<ol>
-<li>
-<strong><span style="color: #639922;">@SpringBootConfiguration</span></strong>
-<p>Spring의 기존 <code>@Configuration</code>과 동일한 역할을 합니다. 이 메인 클래스 자체가 스프링의 <strong>환경 설정 클래스(설정의 시작점)</strong>임을 명시합니다. (자료에서 설명이 누락되어 보충합니다.)</p>
-</li>
+### 1️⃣ `@SpringBootApplication`
+스프링 부트 프로젝트의 메인 클래스에 붙는 **단 하나의 마법 애너테이션**입니다. 사실 이 녀석은 아래 3가지 핵심 애너테이션의 집합체(메타 애너테이션)입니다.
 
-<li>
-<strong><span style="color: #EF9F27;">@ComponentScan</span></strong>
-<p>개발자가 직접 만든 클래스들을 찾아서 빈(Bean)으로 등록하는 역할을 합니다. <code>@Controller</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Component</code> 어노테이션이 붙은 클래스들을 스캔하여 스프링 컨테이너에 메모리로 올립니다.</p>
-</li>
+* **`@SpringBootConfiguration`**
+    * **역할:** 이 (Entry Point를 포함한)클래스가 애플리케이션의 **메인 설정 클래스('의미 상')**임을 선언합니다.
+    * **특징:** 스프링의 기존 `@Configuration`과 기능이 100% 동일하여 <span style="color: #27ae60;"><b>내부에서 등록한 `@Bean` 객체들을 완벽한 싱글톤(Singleton)으로 유지 및 관리</b></span>해 줍니다. (생성은 스프링의 빈 메서드,생성 및 주입은 스프링의 역할)
+    * **존재 이유:** 테스트 환경(`@SpringBootTest`) 실행 시, 애플리케이션의 시작점을 자동으로 추적하기 위한 **이름표(Marker)** 역할을 합니다.
 
-<li>
-<strong><span style="color: #E24B4A;">@EnableAutoConfiguration</span></strong>
-<p><strong>스프링 부트 마법의 핵심</strong>입니다. 개발자가 등록한 빈 외에도, 프로젝트에 추가한 라이브러리(Dependencies)를 바탕으로 <strong>Spring이 사전에 미리 정의해 놓은 수많은 Bean들을 상황에 맞게 자동으로 등록</strong>해 줍니다.
+* **`@ComponentScan`**
+    * **오해와 진실:** 스캔하면서 주입(Injection)을 같이 해주는 것이 **아닙니다!**
+    * **역할:** 하위 폴더를 쫙 스캔해서 `@Component`, `@Service` 등이 붙은 클래스를 찾아내 <span style="color: #2980b9;"><b>스프링 컨테이너(IoC 바구니)에 새로운 객체(Bean)로 '등록(수집)'하는 사전 준비 작업</b></span>입니다.
+
+* **`@EnableAutoConfiguration`**
+    * **역할:** 개발자가 추가한 외부 라이브러리가 잘 돌아가도록, **스프링 부트가 미리 짜둔 설정 코드(레시피)를 알아서 실행**해 주는 자동화 도우미입니다.
+
+---
+
+## 2. ⚙️ 빈(Bean)의 생명주기: 스캔과 주입의 철저한 분리
+
+스프링 프레임워크 내부에서는 객체의 **'생성(등록)'**과 **'연결(주입)'**이 명백하게 분리된 2단계로 일어납니다.
+
+1.  <span style="color: #e67e22;"><b>탐색 및 등록 단계 (`@ComponentScan`)</b></span>: 하위 폴더를 스캔하여 싱글톤 빈 객체들을 생성하고 스프링 컨테이너에 모아둡니다.
+2.  <span style="color: #e67e22;"><b>의존성 주입 단계 (`@Autowired`)</b></span>: 컨테이너(스프링 엔진)가 바구니에 담긴 빈들을 확인하고, 서로 필요한 객체들을 찾아내어 쏙쏙 연결(주입)해 줍니다.
+
+> 💡 **핵심 포인트:** 즉, 주입을 실행하는 주체는 어노테이션 자체가 아니라 **스프링 IoC 컨테이너**입니다.
+
+---
+
+## 3. 🛠️ "이게 진짜 된다고?" - 물리적 구현체와 빌드 시스템의 비밀
+
+C++ 개발 환경에서 일일이 `.dll` 파일의 링킹 경로를 잡던 고통을 생각하면, 스프링 부트의 빌드 방식은 "구라가 아닌가?" 싶을 정도로 압도적인 편의성을 자랑합니다. 
+
+이 마법은 **`pom.xml`(또는 `build.gradle`)**과 **`@EnableAutoConfiguration`**의 완벽한 분업에서 나옵니다.
+
+### 📦 1단계: 주문 및 택배 배송 (`pom.xml` / Maven)
+* **물리적 파일 확보: cpp처럼 하드디스크의 라이브러리 실행파일을 링크하는 방식이 아니라 ** `pom.xml`에 "스프링 웹 쓸 거임"이라고 텍스트 한 줄만 적으면, Maven이라는 빌드 도구가 **전 세계 공용 클라우드(Maven Central)에서 C++의 실행 바이너리와 똑같은 `.jar` 파일(구현체)을 내 컴퓨터 하드디스크로 통째로 다운로드**합니다. 
+* 물리적인 코드가 내 로컬 메모리로 들어오는 과정입니다.
+
+### 🪄 2단계: 자동 세팅 및 조립 (`@EnableAutoConfiguration`)
+* **스마트한 설정 (`@Conditional`):** 스프링 부트 안에는 수백 개의 **'순수 텍스트 자바 설정 설명서'**가 들어있습니다. 용량이 아주 가볍습니다.
+* **동작 방식:** 프로젝트를 실행할 때, 내 컴퓨터에 어떤 `.jar` 재료들이 다운로드되어 있는지 쓱 훑어보고 <span style="color: #27ae60;"><b>조건이 일치하는 라이브러리의 설정 코드만 쏙쏙 뽑아서 자동으로 실행(메모리 적재 및 조립)</b></span>해 줍니다.
 
 
-(예: 내장 톰캣 서버 설정, DispatcherServlet 등록 등 스프링 초기 세팅의 대부분이 여기서 이루어집니다.)</p>
-</li>
-</ol>
+
+---
+
+### 🌟 최종 요약
+
+> 🗣️ *"내 컴퓨터에 물리적인 구현체(`.jar`)를 클라우드에서 알아서 다운받아 주고, 실행할 때 JVM이 그걸 메모리에 쫙 올리기 위한 번거로운 설정 코드까지 자동으로 준비해 주는 초강력 자동화 시스템!"*
+
+이것이 바로 현대 Java/Spring 생태계가 가진 강력한 생산성의 원천입니다.
 
 <br>
 
