@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/@SpringBootApplication-ff69b4?style=flat-square"> : 
   <ol>
     <li><code>@ComponentScan</code>이 포함되어 있습니다. 기본 설정값은 <code>Application.java</code> 클래스가 위치한 현재 패키지 및 그 하위 전체입니다.</li>
+    <hr>
     <li>
       빈 주입(DI)
       <ol>
@@ -26,8 +27,8 @@
         <li><strong>Repo 주입:</strong> <code>com.ssafy.ws.repo(dao)</code> 패키지의 인터페이스나 클래스도 서비스 계층에서 바로 주입받아 사용할 수 있습니다.</li>
       </ol>
      </li>
+     <hr>
     <li>
-      ![alt text](image.png)
       <p><code>WsFrameworkApplication.java</code> 클래스는 <code>com.ssafy.ws</code> 패키지와 그 하위에 있는 모든 패키지를 탐색 범위로 가집니다.</p>
       <blockquote>
       스프링 부트는 메인 클래스가 위치한 패키지를 <strong>루트(Root)</strong>로 인식합니다. 따라서 아래의 모든 패키지 안에 있는 클래스들이 <code>@Controller</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Component</code> 등의 어노테이션을 가지고 있다면 자동으로 빈으로 등록됩니다.
@@ -41,16 +42,22 @@
     </li>
   </ol>
   </li>
+  <hr>
   <li>
     <strong>@Configuration:</strong> 개발자가 직접 자바 코드로 빈(Bean)을 등록하고 싶을 때 사용합니다.
   </li>
+  <hr>
   <li>
-    <strong>application.properties / application.yml:</strong> 주로 <code>src/main/resources</code> 경로에 위치하며, 포트 번호, JSP(prefix, suffix), JDBC 설정(SQL 사용자, SQL password, DB URL, 드라이버 경로), 디버그 모드 등을 설정합니다.
+    <strong> <img src="https://img.shields.io/badge/application.properties / application.yml:-ff69b4?style=flat-square"></strong> 주로 <code>src/main/resources</code> 경로에 위치하며, 포트 번호, JSP(prefix, suffix), JDBC 설정(SQL 사용자, SQL password, DB URL, 드라이버 경로), 디버그 모드 등을 설정합니다.
   </li>
+  <hr>
   <li>
-    <strong>pom.xml 또는 build.gradle:</strong> 프로젝트의 의존성 및 버전을 지정하며 빌드 시 설정에 따라 Library를 가져옵니다.
+    <strong> <img src="https://img.shields.io/badge/pom.xml 또는 build.gradle:-ff69b4?style=flat-square"></strong> 프로젝트의 의존성 및 버전을 지정하며 빌드 시 설정에 따라 Library를 가져옵니다.
   </li>
 </ol>
+
+ ![alt text](image.png)
+
 1. 수정자 주입 (Setter Injection)
 
 ```Java
