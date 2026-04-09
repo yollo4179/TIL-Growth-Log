@@ -12,10 +12,10 @@
  
 <ol>
    <p> @Controller 애너테이션을 붙인 클래스 안에 호출할 메서드를 <code>@ + http 데이터 통신 방식+ Mapping</code> 에너테이션과함께 구현합니다.</p>
-<li>1. @GetMapping("url"): 조회</li>
-<li>2. @PostMapping("url"): 삽입</li>
-<li>3. @PutMapping("url"): 수정</li>
-<li>4. @DeleteMapping("url"): 삭제</li>
+<li> @GetMapping("url"): 조회</li>
+<li> @PostMapping("url"): 삽입</li>
+<li> @PutMapping("url"): 수정</li>
+<li> @DeleteMapping("url"): 삭제</li>
 </ol> 
 
 - 3. Controller : 사용자가 요청한 `서비스 계층`을 `호출`하고, 그 결과를 받아 `Model` 혹은 `HtttEntity<?>(객체 등의 데이터,code)`에 담는 등 실질적인 일을 처리합니다.
@@ -23,6 +23,7 @@
 <hr>
 
 ## JSP를 사용하는 경우에만 유효합니다. (ResponseBody(json)이나 HttpEntity<?>로 반환하는 경우 는 해당 사항 ❌) 
+
 - 4. View Resolver :  Controller가 반환한 뷰의 '이름'(예: "home")을 받아서, 실제 뷰 파일이 있는 '물리적인 경로'(예: /WEB-INF/views/home.jsp)로 변환하는 것뿐 아니라 `View객체를 생성해서 서블릿 디스패처에 반환`합니다.
  
  왜쓰나요? why❓<br>
