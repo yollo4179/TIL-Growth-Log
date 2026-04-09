@@ -80,6 +80,7 @@ ModelAndView: 데이터(Model)와 화면 이름(View)을 동시에 담아 반환
 🤝 3. Controller와 JSP의 데이터 연동
 Controller에서 Model 객체에 데이터를 담으면, JSP에서는 EL(Expression Language)인 ${} 를 사용하여 쉽게 값을 꺼내어 출력할 수 있습니다.
 ![alt text](image-1.png)
+```
 ☕ Controller 측 (Java)
 
 ```Java
