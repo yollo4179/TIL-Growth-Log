@@ -43,23 +43,18 @@
   <tr style="background-color: #f8f9fa;">
     <th style="padding: 10px; text-align: left;">1. 클라이언트가 서버의 url로 Get방식의 http 요청</th>
   </tr>
- </table>
 
 
-<table border="1" style="border-collapse: collapse; width: 100%;">
-  <tr style="background-color: #f8f9fa;">
+
+ <tr style="background-color: #f8f9fa;">
     <th style="padding: 10px; text-align: left;">2. tomcat은 http 요청을 받고 요청을 servlet객체로 변환.
    (HttpServletRequest,HttpServletResponse 객체를 생성하고 Dispatcher Srvlet에게 전달)</th>
   </tr>
- </table>
+ 
 
- <table border="1" style="border-collapse: collapse; width: 100%;">
   <tr style="background-color: #f8f9fa;">
     <th style="padding: 10px; text-align: left;">3. DispatcherServlet(프론트 컨트롤러)가 HandlerMapping에게 해당 요청의 url을 어떤 컨트롤러가 처리하는지 묻고 Handler Adapter를 통해 컨트롤러를 실행</th>
   </tr>
- </table>
-
- <table border="1" style="border-collapse: collapse; width: 100%;">
   <tr style="background-color: #f8f9fa;">
     <th style="padding: 10px; text-align: left;">4. 컨트롤러 실행 ( 서비스 레이어의 비지니스 로직 실행)</th>
   </tr>
