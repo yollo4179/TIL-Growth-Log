@@ -309,7 +309,8 @@ public class HomeController {
    장점: 응답 속도가 빨라지고, 시스템 자원을 효율적으로 관리할 수 있습니다.<br>
    
    
-   **<font color="red">HikariCP(Connection Pool)</font>**는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.(미리 만들어 놓고<<strong>풀링과 재사용</strong>)<br>
+   <font color="red">HikariCP(Connection Pool)</font>는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.<br>
+   (퓰을 미리 만들어 놓고<strong>재사용</strong>) <br>
    
    `커넥션(Connection)`: DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.<br>
    
