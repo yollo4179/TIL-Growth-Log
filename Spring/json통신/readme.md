@@ -169,30 +169,20 @@ HTTP Response 생성 후 전송<br>
 
 <table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Converter 명칭</th><th>지원하는 데이터 타입</th><th>미디어 타입 (MIME)</th></tr></thead><tbody><tr><td><b>ByteArrayHttpMessageConverter</b></td><td><code>byte[]</code></td><td><code>application/octet-stream</code> 등 모든 미디어 타입</td></tr><tr><td><b>StringHttpMessageConverter</b></td><td><code>String</code></td><td><code>text/plain</code></td></tr><tr><td><b>MappingJackson2HttpMessageConverter</b></td><td><code>Object</code> (주로 DTO/Entity)</td><td><code>application/json</code></td></tr></tbody></table>
 
-<pre style="font-size: 2.1em; line-height: 1.5;">
-① 컨버터 결정 방식: "너 이거 할 줄 알아?"
-스프링은 등록된 여러 컨버터를 순회하며 두 가지 조건을 체크합니다.
 
-1. 대상 클래스 타입: 컨트롤러 메서드의 파라미터나 반환 타입이 컨버터가 처리 가능한 타입인가?
-
-2. HTTP Content-Type / Accept 헤더: 요청의 Content-Type 혹은 응답의 Accept 헤더를 지원하는가?
-
-예: 클라이언트가 JSON을 보냈다면 MappingJackson2...가 선택됩니다.
-
-② Jackson 라이브러리와의 관계 (중요)
- MappingJackson2HttpMessageConverter, 이 클래스 내부에는 <code>Jackson 라이브러리의 ObjectMapper</code>가 들어있어, 실질적인 JSON 직렬화/역직렬화 작업을 수행합니다.
-
-③ 우선순위
-스프링 부트는 컨버터들을 리스트에 담아 관리하는데, 기본적으로 우선순위가 정해져 있습니다.
-
-바이트 배열 (byte[])
-
-문자열 (String)
-
-객체 (Object/JSON) 순으로 체크하며 적합한 것을 찾습니다.
-</pre>
-
-# 기본 REST API 구현 예시
+## ① 컨버터 결정 방식: "너 이거 할 줄 알아?"
+## 스프링은 등록된 여러 컨버터를 순회하며 두 가지 조건을 체크합니다.
+## 1. 대상 클래스 타입: 컨트롤러 메서드의 파라미터나 반환 타입이 컨버터가 처리 가능한 타입인가?
+## 2. HTTP Content-Type / Accept 헤더: 요청의 Content-Type 혹은 응답의 Accept 헤더를 지원하는가?
+## 예: 클라이언트가 JSON을 보냈다면 MappingJackson2...가 선택됩니다.
+## ② Jackson 라이브러리와의 관계 (중요)
+##  MappingJackson2HttpMessageConverter, 이 클래스 내부에는 <code>Jackson 라이브러리의 ObjectMapper</code>가 들어있어, 실질적인 JSON 직렬화/역직렬화 작업을 수행합니다.
+## ③ 우선순위
+## 스프링 부트는 컨버터들을 리스트에 담아 관리하는데, 기본적으로 우선순위가 정해져 있습니다.
+## 바이트 배열 (byte[])
+## 문자열 (String)
+## 객체 (Object/JSON) 순으로 체크하며 적합한 것을 찾습니다.
+## 기본 REST API 구현 예시
 
 <table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Method</th><th>Path</th><th>Request Body</th><th>Response</th><th>설명</th></tr></thead><tbody><tr><td><b>GET</b></td><td><code>/admin/user</code></td><td>-</td><td><code>List&lt;MemberDto&gt;</code> - Json Array</td><td>회원 전체 조회</td></tr><tr><td><b>GET</b></td><td><code>/admin/user/{userid}</code></td><td>-</td><td><code>MemberDto</code> - Json</td><td>회원 한 명 조회</td></tr><tr><td><b>POST</b></td><td><code>/admin/user</code></td><td>json - <code>MemberDto</code></td><td>입력된 <code>MemberDto</code> - Json</td><td>회원 등록</td></tr><tr><td><b>PUT</b></td><td><code>/admin/user/{userid}</code></td><td>json - <code>MemberDto</code></td><td>수정된 <code>MemberDto</code> - Json</td><td>회원 수정</td></tr><tr><td><b>DELETE</b></td><td><code>/admin/user/{userid}</code></td><td>-</td><td>-</td><td>회원 삭제</td></tr></tbody></table>
 
