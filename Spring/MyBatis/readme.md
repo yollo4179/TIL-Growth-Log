@@ -161,8 +161,8 @@ mybatis.mapper-locations=mapper/**/*.xml
 
 # 단건 조회하기 
 
- - 1. 단건 조회 결과를 담을 Entity class 생성하기(멤버는 컬럼과 동일하게 구성)
- - 2. 객체 생성 후, getter, setter를 호출하는 것이 기본이므로 <code>사용자 정의 생성자는 만들지 않는 것이 좋습니다- (default 생성자가 만들어지도록) </code>
+1. 단건 조회 결과를 담을 Entity class 생성하기(멤버는 컬럼과 동일하게 구성)
+2. 객체 생성 후, getter, setter를 호출하는 것이 기본이므로 <code>사용자 정의 생성자는 만들지 않는 것이 좋습니다- (default 생성자가 만들어지도록) </code>
   기본 생성자: DTO에 사용자 정의 생성자만 있을 경우 MyBatis가 객체를 생성하지 못하므로 @NoArgsConstructor를 반드시 확인하세요.
  ```java
  package com.ssafy.mybatis.entity;
@@ -179,9 +179,9 @@ public class GuestBook {
 }
 ```
 
-- 3. 구현체 불필요: 예전에는 Dao 인터페이스를 만들고 DaoImpl에서 SQL 세션을 열어 직접 쿼리를 호출했지만, MyBatis Mapper 방식을 쓰면 인터페이스만 정의하면 됩니다.
-- 4. 연결 고리: 이 인터페이스의 메서드 이름(selectGuestBook)은 나중에 작성할 Mapper XML의 id 값과 반드시 일치해야 합니다.
-- 5. 역할: MyBatis 라이브러리가 이 인터페이스를 참조하여 실제 DB 쿼리 동작을 수행합니다.
+3. 구현체 불필요: 예전에는 Dao 인터페이스를 만들고 DaoImpl에서 SQL 세션을 열어 직접 쿼리를 호출했지만, MyBatis Mapper 방식을 쓰면 인터페이스만 정의하면 됩니다.
+4. 연결 고리: 이 인터페이스의 메서드 이름(selectGuestBook)은 나중에 작성할 Mapper XML의 id 값과 반드시 일치해야 합니다.
+5.  역할: MyBatis 라이브러리가 이 인터페이스를 참조하여 실제 DB 쿼리 동작을 수행합니다.
 
 ```java 
 
@@ -210,13 +210,13 @@ public interface GuestBookRepo {//==dao ==mapper==repository
 </mapper>
 ```
 
-- 7. namespace: XML의 <mapper namespace="..."> 값은 반드시 **인터페이스의 전체 경로(패키지 포함)**와 일치해야 합니다.
+7. namespace: XML의 <mapper namespace="..."> 값은 반드시 **인터페이스의 전체 경로(패키지 포함)**와 일치해야 합니다.
 
-- 8. id: <select id="...">의 값은 인터페이스의 메서드 이름과 동일해야 합니다.
+8. id: <select id="...">의 값은 인터페이스의 메서드 이름과 동일해야 합니다.
 
-- 9. resultType: 쿼리 결과를 담을 객체는 아까 만든 DTO의 전체 경로를 적어줍니다.
+9. resultType: 쿼리 결과를 담을 객체는 아까 만든 DTO의 전체 경로를 적어줍니다.
 
-- 10. #{no}: 파라미터가 1개일 때는 #{no}, #{id}, #{articleno} 등 이름을 자유롭게 지어도 MyBatis가 알아서 매칭해 줍니다.
+10. #{no}: 파라미터가 1개일 때는 #{no}, #{id}, #{articleno} 등 이름을 자유롭게 지어도 MyBatis가 알아서 매칭해 줍니다.
 
 # 📌 MyBatis 매핑 핵심 정리
 
@@ -283,8 +283,6 @@ public class HomeController {
   </tr>
   <tr>
     <td style="padding: 20px; line-height: 1.8;">
-
-  
 DB Connection을 내가 만들어야 할까? 그리고, connection관리는 누가 해야 할까?<br>
 
 Spring Boot에서는 default connection pool로 HikariCP가 사용되며<br>
