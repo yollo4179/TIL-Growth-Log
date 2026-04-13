@@ -1,43 +1,35 @@
 # Rest API란?
+
 - Rest는 'Representational State Transfer'의 약어로 하나의 <code>URL</code>는 <code>>하나의 고유한 리소스</code>를 대표하도록 설계해야한다는 개념의 <code>전송방식<code>입니다.
 
 ![alt text](image.png)
 
--HTTP URL을 통해 제어할 자원을 명시하고 , http method(get,post,put,delete)를 통해 해당 자원을 제어하는 명령을 내리는 방식의 아키텍쳐입니다.
+- HTTP URL을 통해 제어할 자원을 명시하고 , http method(get,post,put,delete)를 통해 해당 자원을 제어하는 명령을 내리는 방식의 아키텍쳐입니다.
 
 <ol>
 잘표현된 HTTP URL로 자원을 정의하고 HTTP method로 리소스에 대한 행위를 정의합니다. 
 <code>클라이언트에서 자원을 요청</code>하면 서버로부터 표현을 받는데, 표현은 <code>json,xml,html</code>과 같은 형태로 제공합니다.
 <li><code>자원(Resource):</code> -  (Uniform Resource Locator)</li>
-
 <li><code>행위(verb):</code> -  (HTTP Method)</li>
 <li><code>표현(Representations)</code></li>
-
 </ol>
-
-- 하이픈(-)은 사용 가능, 언더바(_)는 금지: 가독성을 위해 하이픈은 쓰되, 언더바는 사용하지 않습니다. (단, query - string은 _나 camelCase를 사용하기도 함)
-
+- 하이픈(-)은 사용 가능, 언더바(*)는 금지: 가독성을 위해 하이픈은 쓰되, 언더바는 사용하지 않습니다. (단, query - string은 *나 camelCase를 사용하기도 함)
 - 소문자 사용: 대문자는 가급적 사용하지 않습니다. (RFC 3986은 URI를 대소문자로 구분하기 때문)
-
 - 마지막 슬래시(/) 미포함: URI의 마지막에는 슬래시를 붙이지 않습니다.
-
 - 계층 관계 표현: 슬래시(/)는 리소스 간의 계층 관계를 나타내는 데 사용합니다.
-
 - <code>명사(URL) 사용</code>: URL는 행동이 아닌 자원을 식별합니다. (행위는 HTTP Method로 표현)
 
-
-
 ## rest api 설계 예시
+
 ```Java
-// Controller.java 내의 메서드를 애너테이션으로 매핑시킨다. 
+// Controller.java 내의 메서드를 애너테이션으로 매핑시킨다.
 
 @GetMapping("/blog/{id}")   // 조회(단건)
 @PostMapping("/blog")       // 생성(삽입)
 @PutMapping("/blog/{id}")   // 수정(갱신)
 @DeleteMapping("/blog/{id}") // 삭제
 ```
-# 
-```xml
+
 <table border="1">
   <thead>
     <tr>
@@ -74,9 +66,8 @@
     </tr>
   </tbody>
 </table>
-```
 
-# RESTA API 관련 애너테이션 
+# REST API 관련 애너테이션
 
 <table>
   <thead>
@@ -90,7 +81,6 @@
       <td><code>@RestController</code></td>
       <td>Controller가 REST 방식을 처리하기 위한 것임을 명시 (Controller + ResponseBody), 모든 컨트롤러내의 매서드는 @ResponseBodt를 생략해도 json, String등의 데이터로 반환한다.
       </td>
-
     </tr>
     <tr>
       <td><code>@ResponseBody</code></td>
@@ -110,23 +100,27 @@
       <td><code>@RequestBody</code></td>
       <td>HTTP 요청의 JSON 데이터를 자바 객체(DTO 등) 타입으로 바인딩</td>
     </tr>
+
   </tbody>
 </table>
 
 - @ResponseBody로 받는 컨트롤러 매서드.
-전체 흐름 검증
+  전체 흐름 검증
+
 1. 클라이언트가 서버의 url로 Get방식의 http 요청
-2. tomcat은 http 요청을 받고 요청을 servlet객체로 변환. 
-(HttpServletRequest,HttpServletResponse 객체를 생성하고 Dispatcher Srvlet에게 전달)
+2. tomcat은 http 요청을 받고 요청을 servlet객체로 변환.
+   (HttpServletRequest,HttpServletResponse 객체를 생성하고 Dispatcher Srvlet에게 전달)
 3. DispatcherServlet(프론트 컨트롤러)가 HandlerMapping에게 해당 요청의 url을 어떤 컨트롤러가 처리하는지 묻고 Handler Adapter를 통해 컨트롤러를 실행
 4. 컨트롤러 실행 ( 서비스 레이어의 비지니스 로직 실행)
- ```Java
- @GetMapping("/blog/{id}")
- 
+
+```Java
+@GetMapping("/blog/{id}")
+
 public @ResposneBody Blog getBlog(@PathVariable String id) {
-    return blog;
+   return blog;
 }
 ```
+
 5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.
 <pre>
 ✔ 분기 1: @ResponseBody 있음
@@ -142,13 +136,15 @@ Jackson
 ✔ 분기 2: @ResponseBody 없음
 흐름
 → ViewResolver 호출
+
 </pre>
 
 6. (case-1)HttpMessageConverter (JSON 변환)
 <pre>
-* 역할
-Java 객체 → JSON 문자열 변환
-* 실제 구현
+
+- 역할
+  Java 객체 → JSON 문자열 변환
+- 실제 구현
 Spring의 MappingJackson2HttpMessageConverter( spring이 내부적으로 Jackson을 사용해 구현)
 </pre>
 
@@ -158,12 +154,13 @@ Spring의 MappingJackson2HttpMessageConverter( spring이 내부적으로 Jackson
 View 이름 → 실제 파일(JSP 등)로 변환
 </pre>
 
-7. HttpServletResponse 작성
+7.  HttpServletResponse 작성
 <pre>
 역할
 
 👉 최종 응답 데이터 작성
 JSON(spa) 또는 HTML(ssr)이 여기 들어감
+
 </pre>
 
 8. Tomcat → 클라이언트 응답
@@ -176,11 +173,13 @@ HTTP Response 생성 후 전송
 
 기존 연결을 통해 응답
 새로운 요청 보내는 거 아님
+
 </pre>
 
-
 # HttpMessageConverter 핵심 요약
+
 ## 1. 이미지 내용 추출
+
 정의: 스프링 프레임워크(Spring MVC)에서 제공하는 인터페이스입니다.
 
 역할: HTTP 요청 본문(Request Body)을 객체로 변경하거나, 객체를 HTTP 응답 본문(Response Body)으로 변경할 때 사용합니다.
@@ -189,7 +188,7 @@ HTTP Response 생성 후 전송
 
 동작 원리: 요청 본문에 데이터가 있을 때 @RequestBody를 파라미터에 붙이면 body 내부의 데이터를 Object로 자동 변환해 줍니다.
 
-## 2. 주요 컨버터 종류 
+## 2. 주요 컨버터 종류
 
 <table>
   <thead>
@@ -241,7 +240,8 @@ HTTP Response 생성 후 전송
 객체 (Object/JSON) 순으로 체크하며 적합한 것을 찾습니다.
 </pre>
 
-# 기본 REST API 구현 예시 
+# 기본 REST API 구현 예시
+
 <table>
   <thead>
     <tr>
@@ -291,9 +291,10 @@ HTTP Response 생성 후 전송
   </tbody>
 </table>
 
-# 멀티 조회 예시 
+# 멀티 조회 예시
 
 # repo 코드
+
 ```Java
 //메인앱 scan 영역에 있어야합니다.
 @Mapper
@@ -303,6 +304,7 @@ public interface UserDao {
 ```
 
 ## 매퍼.xml 파일 쿼리 작성 ,id는 userList()
+
 '''xml
 <mapper namespace="com.ssafy.rest.dao.UserDao">
 
@@ -324,18 +326,17 @@ public interface UserDao {
 # <code>cors와 클라이언트, 서버와의 통신 구현</code>
 
 1. 프론트엔드와 백엔드의 분리
-Node.js 서버 (Port 5173): 브라우저는 먼저 5173 포트로 동작하는 Node 서버(Vite 등)로부터 html, css, js 파일을 다운로드합니다.
+   Node.js 서버 (Port 5173): 브라우저는 먼저 5173 포트로 동작하는 Node 서버(Vite 등)로부터 html, css, js 파일을 다운로드합니다.
 
 Spring 서버 통신: 정적 리소스를 로드한 이후에는 백엔드인 Spring 서버와 **ajax(Axios 등)**를 통해 데이터를 주고받습니다.
 
 2. 환경 설정
-.env 파일: 프로젝트의 환경 변수를 관리하는 .env 파일에 설정된 base url을 확인하여 API 요청을 보낼 서버의 주소를 결정합니다.
-![alt text](image-1.png)
+   .env 파일: 프로젝트의 환경 변수를 관리하는 .env 파일에 설정된 base url을 확인하여 API 요청을 보낼 서버의 주소를 결정합니다.
+   ![alt text](image-1.png)
 
 ## 1. Vite 환경 변수 활용 및 Axios 설정
 
 ```javascript
-
 // 환경 변수에서 REST API URL 추출
 const { VITE_REST_API_URL } = import.meta.env;
 
@@ -343,17 +344,20 @@ const { VITE_REST_API_URL } = import.meta.env;
 export default axios.create({
   baseURL: VITE_REST_API_URL,
   headers: {
-    'Content-type': 'application/json;charset=utf-8',
+    "Content-type": "application/json;charset=utf-8",
   },
 });
 ```
+
 ## 2. 환경 변수 설정 (.env)
+
 ```javascript
 # must starts with VITE_
 VITE_REST_API_URL=http://localhost:8080/
 ```
 
 # CORS
+
 <pre>
 CORS(Cross-Origin Resource Sharing)
 특정 서버에서 다운 받은 js로 다른 웹 사이트를 제약없이 서핑할 수 있을까?
