@@ -309,12 +309,13 @@ public class HomeController {
    장점: 응답 속도가 빨라지고, 시스템 자원을 효율적으로 관리할 수 있습니다.<br>
    
    
-   <font color="red">HikariCP(Connection Pool)</font>는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.<br>
-   (퓰을 미리 만들어 놓고<strong>재사용</strong>) <br>
+   <font color="red">HikariCP(Connection Pool)</font>는 이 `Connection` 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.<br>
+   (퓰을 미리 만들어 놓고<strong>재사용</strong>) <hr>
    
    `커넥션(Connection)`: DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.<br>
    
-   ResultSet과의 차이: ResultSet은 쿼리 실행 결과(데이터)를 담고 있는 객체이므로 커넥션과는 다릅니다. 커넥션이 **'통로'**라면, ResultSet은 그 통로를 통해 가져온 **'화물'**이라고 이해하시면 됩니다.<br>
+   `*커넥션과 ResultSet과의 차이`: ResultSet은 <strong>쿼리 실행 결과(데이터)를 담고 있는 객체</strong>이므로 커넥션과는 다릅니다. 커넥션이 **'통로'**라면,<br>
+   ResultSet은 그 통로를 통해 가져온 `화물`이라고 이해하시면 됩니다.<hr>
    
    히카리풀 없어도 되나요❓ (성능 vs 필수)<br>
    필수는 아닙니다: 히카리풀이 없어도 DriverManager를 써서 매번 연결을 맺고 끊으며 DB를 사용할 수는 있습니다. (순수 JDBC 방식)<br>
