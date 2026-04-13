@@ -54,13 +54,15 @@ public @ResposneBody Blog getBlog(@PathVariable String id) {
 ```
 
 5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.
-<pre style="font-size: 2.2em; line-height: 1.5;">
-✔ 분기 1: @ResponseBody 있음
-흐름
-ViewResolver ❌
-→ HttpMessageConverter ✅️
-동작
-객체 → JSON 변환
+<table>
+  <tr>
+    <td>
+      <strong>✅ 분기 1: @ResponseBody 있음</strong><br>
+      - 흐름: ViewResolver (X) → HttpMessageConverter (O)<br>
+      - 동작: 객체 → JSON 변환 (Jackson 사용)
+    </td>
+  </tr>
+</table>
 
 👉 사용:
 
