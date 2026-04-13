@@ -30,9 +30,9 @@
 @DeleteMapping("/blog/{id}") // 삭제
 ```
 
-<table>
+<table border="1" style="border-collapse: collapse; width: 100%;">
   <thead>
-    <tr>
+    <tr style="background-color: #f8f9fa;">
       <th>작업</th>
       <th>기존 방식</th>
       <th>REST 방식</th>
