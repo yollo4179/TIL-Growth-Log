@@ -196,6 +196,7 @@ public interface GuestBookRepo {//==dao ==mapper==repository
 }
 
 # GuestBook.xml
+```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-3-mapper.dtd">
@@ -207,7 +208,6 @@ public interface GuestBookRepo {//==dao ==mapper==repository
     </select>
 
 </mapper>
-
 ```
 
 - 7. namespace: XML의 <mapper namespace="..."> 값은 반드시 **인터페이스의 전체 경로(패키지 포함)**와 일치해야 합니다.
