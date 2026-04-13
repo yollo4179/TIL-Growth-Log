@@ -54,24 +54,26 @@ public @ResposneBody Blog getBlog(@PathVariable String id) {
 ```
 
 5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.
-<table>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">ReturnValueHandler 분기 처리 상세</th>
+  </tr>
   <tr>
-    <td>
-      <strong>✅ 분기 1: @ResponseBody 있음</strong><br>
-      - 흐름: ViewResolver (X) → HttpMessageConverter (O)<br>
-      - 동작: 객체 → JSON 변환 (Jackson 사용)
+    <td style="padding: 20px; line-height: 1.8;">
+      <strong>✅ 분기 1: @ResponseBody가 있는 경우</strong><br>
+      • <strong>흐름:</strong> ViewResolver <span style="color: #d73a49;">❌</span> → <strong>HttpMessageConverter</strong> <span style="color: #28a745;">✅</span><br>
+      • <strong>동작:</strong> Java 객체를 <strong>JSON</strong> 데이터로 변환<br>
+      • <strong>도구:</strong> <code>Jackson</code> 라이브러리 사용 (MappingJackson2HttpMessageConverter)<br>
+      <br>
+      <hr style="border: 0.5px solid #eee;">
+      <br>
+      <strong>✅ 분기 2: @ResponseBody가 없는 경우</strong><br>
+      • <strong>흐름:</strong> <strong>ViewResolver</strong> 호출 <span style="color: #28a745;">✅</span><br>
+      • <strong>동작:</strong> 반환된 문자열을 바탕으로 실제 뷰 파일(JSP, Thymeleaf 등)을 찾아 렌더링
     </td>
   </tr>
 </table>
 
-👉 사용:
-
-Jackson
-✔ 분기 2: @ResponseBody 없음
-흐름
-→ ViewResolver 호출
-
-</pre>
 
 6. (case-1)HttpMessageConverter (JSON 변환)
 <pre style="font-size: 2.1em; line-height: 1.5;">
