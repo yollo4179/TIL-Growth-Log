@@ -34,40 +34,7 @@
 
 # REST API 관련 애너테이션
 
-<table>
-  <thead>
-    <tr>
-      <th>Annotation</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>@RestController</code></td>
-      <td>Controller가 REST 방식을 처리하기 위한 것임을 명시 (Controller + ResponseBody), 모든 컨트롤러내의 매서드는 @ResponseBodt를 생략해도 json, String등의 데이터로 반환한다.
-      </td>
-    </tr>
-    <tr>
-      <td><code>@ResponseBody</code></td>
-      <td>JSP 같은 뷰로 전달되는 것이 아니라 데이터 자체(JSON/String)를 응답 바디에 넣는다.
-      반환형이 entity같은 객체라면 jackson 라이브러리를 이용해 json 형태로 직렬화하는 역할도 수행
-      </td>
-    </tr>
-    <tr>
-      <td><code>@PathVariable</code></td>
-      <td>URL 경로에 있는 값을 메서드 파라미터로 추출 (예: /users/{id})</td>
-    </tr>
-    <tr>
-      <td><code>@CrossOrigin</code></td>
-      <td>Ajax의 크로스 도메인(CORS) 문제를 해결하여 외부 도메인 접근 허용(기본으로 브라우저 정책(sop) 상 다른 포트로의 접근을 허용하지 않기 때문에 서버가 클라의 주소를 허용해야함)</td>
-    </tr>
-    <tr>
-      <td><code>@RequestBody</code></td>
-      <td>HTTP 요청의 JSON 데이터를 자바 객체(DTO 등) 타입으로 바인딩</td>
-    </tr>
-
-  </tbody>
-</table>
+<table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Annotation</th><th>Description</th></tr></thead><tbody><tr><td><code>@RestController</code></td><td>Controller가 REST 방식을 처리하기 위한 것임을 명시 (Controller + ResponseBody), 모든 컨트롤러내의 매서드는 @ResponseBodt를 생략해도 json, String등의 데이터로 반환한다.</td></tr><tr><td><code>@ResponseBody</code></td><td>JSP 같은 뷰로 전달되는 것이 아니라 데이터 자체(JSON/String)를 응답 바디에 넣는다. 반환형이 entity같은 객체라면 jackson 라이브러리를 이용해 json 형태로 직렬화하는 역할도 수행</td></tr><tr><td><code>@PathVariable</code></td><td>URL 경로에 있는 값을 메서드 파라미터로 추출 (예: /users/{id})</td></tr><tr><td><code>@CrossOrigin</code></td><td>Ajax의 크로스 도메인(CORS) 문제를 해결하여 외부 도메인 접근 허용(기본으로 브라우저 정책(sop) 상 다른 포트로의 접근을 허용하지 않기 때문에 서버가 클라의 주소를 허용해야함)</td></tr><tr><td><code>@RequestBody</code></td><td>HTTP 요청의 JSON 데이터를 자바 객체(DTO 등) 타입으로 바인딩</td></tr></tbody></table>
 
 - @ResponseBody로 받는 컨트롤러 매서드.
   전체 흐름 검증
