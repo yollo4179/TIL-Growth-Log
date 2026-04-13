@@ -30,7 +30,7 @@
 @DeleteMapping("/blog/{id}") // 삭제
 ```
 
-<table border="1">
+<table>
   <thead>
     <tr>
       <th>작업</th>
