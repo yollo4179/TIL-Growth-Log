@@ -29,43 +29,8 @@
 @PutMapping("/blog/{id}")   // 수정(갱신)
 @DeleteMapping("/blog/{id}") // 삭제
 ```
-<table><thead><tr><th>작업</th><th>기존 방식</th><th>REST 방식</th><th>비고</th></tr></thead><tbody><tr><td>Create (Insert)</td><td>POST /write.do</td><td>POST /blog/gildong</td><td>쓰기</td></tr>...</tbody></table>
-<table border="1" style="border-collapse: collapse; width: 100%;">
-  <thead>
-    <tr style="background-color: #f8f9fa;">
-      <th>작업</th>
-      <th>기존 방식</th>
-      <th>REST 방식</th>
-      <th>비고</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Create (Insert)</td>
-      <td>POST /write.do</td>
-      <td>POST /blog/gildong</td>
-      <td>쓰기</td>
-    </tr>
-    <tr>
-      <td>Read (Select)</td>
-      <td>GET /view.do?id=gildong&amp;articleno=25</td>
-      <td>GET /blog/gildong/25</td>
-      <td>읽기</td>
-    </tr>
-    <tr>
-      <td>Update (Update)</td>
-      <td>POST /modify.do?id=gildong&amp;articleno=25</td>
-      <td>PUT /blog/gildong/25</td>
-      <td>수정</td>
-    </tr>
-    <tr>
-      <td>Delete (Delete)</td>
-      <td>GET /delete.do?id=gildong&amp;articleno=25</td>
-      <td>DELETE /blog/gildong/25</td>
-      <td>삭제</td>
-    </tr>
-  </tbody>
-</table>
+
+<table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>작업</th><th>기존 방식</th><th>REST 방식</th><th>비고</th></tr></thead><tbody><tr><td>Create (Insert)</td><td>POST /write.do</td><td>POST /blog/gildong</td><td>쓰기</td></tr><tr><td>Read (Select)</td><td>GET /view.do?id=gildong&amp;articleno=25</td><td>GET /blog/gildong/25</td><td>읽기</td></tr><tr><td>Update (Update)</td><td>POST /modify.do?id=gildong&amp;articleno=25</td><td>PUT /blog/gildong/25</td><td>수정</td></tr><tr><td>Delete (Delete)</td><td>GET /delete.do?id=gildong&amp;articleno=25</td><td>DELETE /blog/gildong/25</td><td>삭제</td></tr></tbody></table>
 
 # REST API 관련 애너테이션
 
