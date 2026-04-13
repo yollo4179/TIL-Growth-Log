@@ -140,8 +140,6 @@ JSON(spa) 또는 HTML(ssr)이 여기 들어감<br>
   </tr>
  <tr>
  <td style="padding: 20px; line-height: 1.8;">
-
-<pre style="font-size: 2.1em; line-height: 1.5;">
 역할<br>
 HttpServletResponse를 기반으로<br>
 HTTP Response 생성 후 전송<br>
