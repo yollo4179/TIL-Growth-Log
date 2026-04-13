@@ -77,3 +77,15 @@ addCorsMapping을 override해서 mapping해줄 경로와 허용해줄 origin을 
 </td>
 </tr>
 </table>
+
+# Exception Handling
+
+* 스프링부트에는 기본적으로  Error Handler가 포함되어 있습니다.
+* inde 페이지가 없을 때, localhost:8080으로 요청 시, 보이는 화면이 기본 error handler가 처리해준 결과입니다.<br>
+* ■ 기본 Error Handling 로직은<br>
+  org.springframework.boot.autoconfigure.web.servlet.error.<br>
+  BasicErrorController, ErrorMvcAutoConfiguration에 들어있습니다.<br>
+![alt text](image-1.png)
+해당 이미지는 해당 경로에 sb로 태그 데이터를 담아서 화면에 뿌립니다.<hr>
+
+# mvc 예외처리하기 ( jsp화면으로 처리하기, json(httpEntity)로 처리하기)
