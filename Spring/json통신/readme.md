@@ -54,7 +54,7 @@ public @ResposneBody Blog getBlog(@PathVariable String id) {
 ```
 
 5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.2em; line-height: 1.5;">
 ✔ 분기 1: @ResponseBody 있음
 흐름
 ViewResolver ❌
@@ -72,7 +72,7 @@ Jackson
 </pre>
 
 6. (case-1)HttpMessageConverter (JSON 변환)
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 
 - 역할
   Java 객체 → JSON 문자열 변환
@@ -81,13 +81,13 @@ Spring의 MappingJackson2HttpMessageConverter( spring이 내부적으로 Jackson
 </pre>
 
 6.  (case-1)ViewResolver (뷰 렌더링)
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 역할
 View 이름 → 실제 파일(JSP 등)로 변환
 </pre>
 
 7.  HttpServletResponse 작성
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 역할
 
 👉 최종 응답 데이터 작성
@@ -96,7 +96,7 @@ JSON(spa) 또는 HTML(ssr)이 여기 들어감
 </pre>
 
 8. Tomcat → 클라이언트 응답
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 역할
 HttpServletResponse를 기반으로
 HTTP Response 생성 후 전송
@@ -124,7 +124,7 @@ HTTP Response 생성 후 전송
 
 <table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Converter 명칭</th><th>지원하는 데이터 타입</th><th>미디어 타입 (MIME)</th></tr></thead><tbody><tr><td><b>ByteArrayHttpMessageConverter</b></td><td><code>byte[]</code></td><td><code>application/octet-stream</code> 등 모든 미디어 타입</td></tr><tr><td><b>StringHttpMessageConverter</b></td><td><code>String</code></td><td><code>text/plain</code></td></tr><tr><td><b>MappingJackson2HttpMessageConverter</b></td><td><code>Object</code> (주로 DTO/Entity)</td><td><code>application/json</code></td></tr></tbody></table>
 
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 ① 컨버터 결정 방식: "너 이거 할 줄 알아?"
 스프링은 등록된 여러 컨버터를 순회하며 두 가지 조건을 체크합니다.
 
@@ -218,7 +218,7 @@ VITE_REST_API_URL=http://localhost:8080/
 
 # CORS
 
-<pre style="font-size: 1.1em; line-height: 1.5;">
+<pre style="font-size: 2.1em; line-height: 1.5;">
 CORS(Cross-Origin Resource Sharing)
 특정 서버에서 다운 받은 js로 다른 웹 사이트를 제약없이 서핑할 수 있을까?
 
