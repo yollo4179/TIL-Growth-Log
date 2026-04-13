@@ -279,7 +279,7 @@ public class HomeController {
 
 <table border="1" style="border-collapse: collapse; width: 100%;">
   <tr style="background-color: #f8f9fa;">
-    <th style="padding: 10px; text-align: left;"> <strong> Connection Pool</strong>strong></th>
+    <th style="padding: 10px; text-align: left;"> <strong> Connection Pool</strong></th>
   </tr>
   <tr>
     <td style="padding: 20px; line-height: 1.8;">
