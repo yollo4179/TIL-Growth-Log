@@ -221,12 +221,12 @@ public interface GuestBookRepo {//==dao ==mapper==repository
 # 📌 MyBatis 매핑 핵심 정리
 
 1. XML과 Mapper의 1:1 관계
-- 정의: 작성한 Query XML 파일과 자바의 Mapper 인터페이스는 반드시 1:1로 매핑되어야 합니다.
+- 매핑 설정 : 작성한 Query XML 파일과 자바의 Mapper 인터페이스는 반드시 1:1로 매핑되어야 합니다.
 
-- 결과: 이 연결이 틀어지면 Spring 서버가 구동될 때(Context 로딩 시) 즉시 오류를 뱉으며 실행되지 않습니다. (주로 BindingException 발생)
+- 결과: 이 연결이 틀어지면 Spring 서버가 구동될 때(Context 로딩 시) 즉시 <strong>오류</strong>를 뱉으며 실행되지 않습니다. (주로 BindingException 발생)
 
 2. @Mapper 어노테이션의 역할
-- Bean 등록: @Mapper를 붙이면 Spring이 이를 스캔하여 Bean으로 관리합니다. 덕분에 Service 계층에서 @Autowired나 생성자 주입으로 이 인터페이스를 가져와 바로 사용할 수 있습니다.
+- Bean 등록:인터페이스에 @Mapper를 붙이면 Spring이 이를 스캔하여 Bean으로 관리합니다. 덕분에 Service 계층에서 @Autowired나 생성자 주입으로 이 인터페이스를 가져와 바로 사용할 수 있습니다.
 
 - 자동 구현: 개발자가 구현체(Impl)를 직접 만들지 않아도, MyBatis 라이브러리가 인터페이스의 정보를 토대로 실제 동작하는 프록시 객체를 생성해 줍니다.
 
@@ -309,9 +309,9 @@ public class HomeController {
    장점: 응답 속도가 빨라지고, 시스템 자원을 효율적으로 관리할 수 있습니다.<br>
    
    
-   **HikariCP(Connection Pool)**는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.(미리 만들어 놓고<code>풀링과 재사용</code>>)<br>
+   **<font color="red">HikariCP(Connection Pool)</font>**는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.(미리 만들어 놓고<<strong>풀링과 재사용</strong>)<br>
    
-   커넥션(Connection): DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.<br>
+   `커넥션(Connection)`: DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.<br>
    
    ResultSet과의 차이: ResultSet은 쿼리 실행 결과(데이터)를 담고 있는 객체이므로 커넥션과는 다릅니다. 커넥션이 **'통로'**라면, ResultSet은 그 통로를 통해 가져온 **'화물'**이라고 이해하시면 됩니다.<br>
    
