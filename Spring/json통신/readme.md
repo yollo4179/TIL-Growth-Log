@@ -92,43 +92,66 @@ public @ResposneBody Blog getBlog(@PathVariable String id) {
   </tr>
 </table>
 
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">6. (case-1)HttpMessageConverter (JSON 변환) </th>
+  </tr>
+  <tr>
+ <td style="padding: 20px; line-height: 1.8;">
+- 역할<br>
+  Java 객체 → JSON 문자열 변환<br>
+- 실제 구현<br>
+Spring의 MappingJackson2HttpMessageConverter(spring이 내부적으로 Jackson을 사용해 구현)<br>
+ </td>
+  </tr>
+</table>
 
-6. (case-1)HttpMessageConverter (JSON 변환)
+
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">6.  (case-1)ViewResolver (뷰 렌더링) </th>
+  </tr>
+ <tr>
+ <td style="padding: 20px; line-height: 1.8;">
+    역할<br>
+    View 이름 → 실제 파일(JSP 등)로 변환<br>
+</td>
+  </tr>
+</table>
+
+
+
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">7.  HttpServletResponse 작성 </th>
+  </tr>
+ <tr>
+ <td style="padding: 20px; line-height: 1.8;">
+역할<br>
+👉 최종 응답 데이터 작성<br>
+JSON(spa) 또는 HTML(ssr)이 여기 들어감<br>
+</td>
+  </tr>
+</table>
+
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">8. Tomcat → 클라이언트 응답</th>
+  </tr>
+ <tr>
+ <td style="padding: 20px; line-height: 1.8;">
+
 <pre style="font-size: 2.1em; line-height: 1.5;">
+역할<br>
+HttpServletResponse를 기반으로<br>
+HTTP Response 생성 후 전송<br>
+👉 특징:<br>
+기존 연결을 통해 응답<br>
+새로운 요청 보내는 거 아님<br>
+</td>
+  </tr>
+</table>
 
-- 역할
-  Java 객체 → JSON 문자열 변환
-- 실제 구현
-Spring의 MappingJackson2HttpMessageConverter( spring이 내부적으로 Jackson을 사용해 구현)
-</pre>
-
-6.  (case-1)ViewResolver (뷰 렌더링)
-<pre style="font-size: 2.1em; line-height: 1.5;">
-역할
-View 이름 → 실제 파일(JSP 등)로 변환
-</pre>
-
-7.  HttpServletResponse 작성
-<pre style="font-size: 2.1em; line-height: 1.5;">
-역할
-
-👉 최종 응답 데이터 작성
-JSON(spa) 또는 HTML(ssr)이 여기 들어감
-
-</pre>
-
-8. Tomcat → 클라이언트 응답
-<pre style="font-size: 2.1em; line-height: 1.5;">
-역할
-HttpServletResponse를 기반으로
-HTTP Response 생성 후 전송
-
-👉 특징:
-
-기존 연결을 통해 응답
-새로운 요청 보내는 거 아님
-
-</pre>
 
 # HttpMessageConverter 핵심 요약
 
