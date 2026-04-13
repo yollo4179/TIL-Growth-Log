@@ -122,32 +122,7 @@ HTTP Response 생성 후 전송
 
 ## 2. 주요 컨버터 종류
 
-<table>
-  <thead>
-    <tr>
-      <th>Converter 명칭</th>
-      <th>지원하는 데이터 타입</th>
-      <th>미디어 타입 (MIME)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>ByteArrayHttpMessageConverter</b></td>
-      <td><code>byte[]</code></td>
-      <td><code>application/octet-stream</code> 등 모든 미디어 타입</td>
-    </tr>
-    <tr>
-      <td><b>StringHttpMessageConverter</b></td>
-      <td><code>String</code></td>
-      <td><code>text/plain</code></td>
-    </tr>
-    <tr>
-      <td><b>MappingJackson2HttpMessageConverter</b></td>
-      <td><code>Object</code> (주로 DTO/Entity)</td>
-      <td><code>application/json</code></td>
-    </tr>
-  </tbody>
-</table>
+<table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Converter 명칭</th><th>지원하는 데이터 타입</th><th>미디어 타입 (MIME)</th></tr></thead><tbody><tr><td><b>ByteArrayHttpMessageConverter</b></td><td><code>byte[]</code></td><td><code>application/octet-stream</code> 등 모든 미디어 타입</td></tr><tr><td><b>StringHttpMessageConverter</b></td><td><code>String</code></td><td><code>text/plain</code></td></tr><tr><td><b>MappingJackson2HttpMessageConverter</b></td><td><code>Object</code> (주로 DTO/Entity)</td><td><code>application/json</code></td></tr></tbody></table>
 
 <pre>
 ① 컨버터 결정 방식: "너 이거 할 줄 알아?"
@@ -174,46 +149,7 @@ HTTP Response 생성 후 전송
 
 # 기본 REST API 구현 예시
 
-<table>
-  <thead><tr><th>Method</th><th>Path</th><th>Request Body</th><th>Response</th><th>설명</th></tr></thead>
-  <tbody>
-    <tr>
-      <td><b>GET</b></td>
-      <td><code>/admin/user</code></td>
-      <td>-</td>
-      <td><code>List&lt;MemberDto&gt;</code> - Json Array</td>
-      <td>회원 전체 조회</td>
-    </tr>
-    <tr>
-      <td><b>GET</b></td>
-      <td><code>/admin/user/{userid}</code></td>
-      <td>-</td>
-      <td><code>MemberDto</code> - Json</td>
-      <td>회원 한 명 조회</td>
-    </tr>
-    <tr>
-      <td><b>POST</b></td>
-      <td><code>/admin/user</code></td>
-      <td>json - <code>MemberDto</code></td>
-      <td>입력된 <code>MemberDto</code> - Json</td>
-      <td>회원 등록</td>
-    </tr>
-    <tr>
-      <td><b>PUT</b></td>
-      <td><code>/admin/user/{userid}</code></td>
-      <td>json - <code>MemberDto</code></td>
-      <td>수정된 <code>MemberDto</code> - Json</td>
-      <td>회원 수정</td>
-    </tr>
-    <tr>
-      <td><b>DELETE</b></td>
-      <td><code>/admin/user/{userid}</code></td>
-      <td>-</td>
-      <td>-</td>
-      <td>회원 삭제</td>
-    </tr>
-  </tbody>
-</table>
+<table border="1" style="border-collapse:collapse;width:100%;"><thead><tr style="background-color:#f8f9fa;"><th>Method</th><th>Path</th><th>Request Body</th><th>Response</th><th>설명</th></tr></thead><tbody><tr><td><b>GET</b></td><td><code>/admin/user</code></td><td>-</td><td><code>List&lt;MemberDto&gt;</code> - Json Array</td><td>회원 전체 조회</td></tr><tr><td><b>GET</b></td><td><code>/admin/user/{userid}</code></td><td>-</td><td><code>MemberDto</code> - Json</td><td>회원 한 명 조회</td></tr><tr><td><b>POST</b></td><td><code>/admin/user</code></td><td>json - <code>MemberDto</code></td><td>입력된 <code>MemberDto</code> - Json</td><td>회원 등록</td></tr><tr><td><b>PUT</b></td><td><code>/admin/user/{userid}</code></td><td>json - <code>MemberDto</code></td><td>수정된 <code>MemberDto</code> - Json</td><td>회원 수정</td></tr><tr><td><b>DELETE</b></td><td><code>/admin/user/{userid}</code></td><td>-</td><td>-</td><td>회원 삭제</td></tr></tbody></table>
 
 # 멀티 조회 예시
 
