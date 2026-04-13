@@ -52,9 +52,9 @@ public class WebConfiguration implements WebMvcConfigurer{
     }
 }
 ```
-addCorsMapping을 override해서 mapping해줄 경로와 허용해줄 origin을 설정해준다. 
-모든 mapping을 허용해주려면 /hello말고, ./**로 작성한다.
-특정 도메인만 허용 -> "*"
+addCorsMapping을 override해서 mapping해줄 경로와 허용해줄 origin을 설정해준다. <br>
+모든 mapping을 허용해주려면 /hello말고, ./**로 작성한다.<br>
+특정 도메인만 허용 -> "*"<br>
 
 # CORS 플러그인만 사용하는 이유 
 <table>
@@ -62,15 +62,14 @@ addCorsMapping을 override해서 mapping해줄 경로와 허용해줄 origin을 
 <td>
 <tr>
 1. 백엔드 API가 아직 완성되지 않았을 때 <br>
-상황: 화면 개발은 끝났는데, 데이터를 줄 백엔드 API가 아직 개발 중이거나 머지되지 않은 경우입니다.<br>
-해결: 실제 서버 대신 목업(Mock) API나 외부 공공 API를 브라우저에서 직접 연결해 UI가 잘 작동하는지 <br>빠르게 확인합니다.
-<hr>
+상황: 화면 개발은 끝났는데, <string>데이터를 줄 백엔드 API가 아직 개발 중</string>이거나 머지되지 않은 경우입니다.<br>
+해결: 실제 서버 대신 <string>목업(Mock) API나 외부 공공 API를 브라우저에서 직접 연결</string>해 UI가 잘 작동하는지 <br><string>빠르게 확인<string>합니다.<hr>
 2. 권한이 없는 외부 API를 테스트할 때<br>
-상황: 날씨, 뉴스 등 외부 제공 API를 사용하려는데, 해당 서버에서 보안상 localhost 접근을 막아둔 경우입니다.<br>
+상황: <string>날씨, 뉴스 등 외부 제공 API를 사용</string>하려는데, 해당 서버에서 <string>보안상 localhost 접근을 막아<string>둔 경우입니다.<br>
 해결: 내 로컬 개발 환경(localhost)을 외부 API 서버에 일일이 허용해달라고 요청할 수 없으므로,<br> 플러그인으로 브라우저의 보안 검사를 우회하여 데이터를 받아옵니다.
 <hr>
 3. API 응답 값의 구조(JSON)를 미리 확인하고 싶을 때<br>
-상황: 코드에 적용하기 전, 브라우저 환경에서 실제 데이터가 어떻게 들어오는지 콘솔에 찍어보고 싶을 때입니다.<br>
+상황: 코드에 적용하기 전, <string>브라우저 환경에서 실제 데이터가 어떻게 들어오는지 콘솔에 찍어</string>보고 싶을 때입니다.<br>
 해결: Postman 같은 도구도 있지만, 실제 자바스크립트 코드(fetch, axios 등) 상에서 발생하는 변수<br> 처리나 에러를 즉시 확인하기 위해 브라우저에서 직접 호출합니다. <br>
 <hr>
 💡 핵심 요약<br>
