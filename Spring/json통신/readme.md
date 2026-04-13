@@ -39,7 +39,12 @@
 - @ResponseBody로 받는 컨트롤러 매서드.
   전체 흐름 검증
 
-1. 클라이언트가 서버의 url로 Get방식의 http 요청
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;">1. 클라이언트가 서버의 url로 Get방식의 http 요청</th>
+  </tr>
+ </table>
+
 2. tomcat은 http 요청을 받고 요청을 servlet객체로 변환.
    (HttpServletRequest,HttpServletResponse 객체를 생성하고 Dispatcher Srvlet에게 전달)
 3. DispatcherServlet(프론트 컨트롤러)가 HandlerMapping에게 해당 요청의 url을 어떤 컨트롤러가 처리하는지 묻고 Handler Adapter를 통해 컨트롤러를 실행
@@ -53,10 +58,10 @@ public @ResposneBody Blog getBlog(@PathVariable String id) {
 }
 ```
 
-5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.
+
 <table border="1" style="border-collapse: collapse; width: 100%;">
   <tr style="background-color: #f8f9fa;">
-    <th style="padding: 10px; text-align: left;">ReturnValueHandler 분기 처리 상세</th>
+    <th style="padding: 10px; text-align: left;">5. ReturnValueHandler가 반환값을 어떻게 처리할지 판단.</th>
   </tr>
   <tr>
     <td style="padding: 20px; line-height: 1.8;">
