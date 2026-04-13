@@ -164,7 +164,7 @@ mybatis.mapper-locations=mapper/**/*.xml
 1. 단건 조회 결과를 담을 Entity class 생성하기(멤버는 컬럼과 동일하게 구성)
 2. 객체 생성 후, getter, setter를 호출하는 것이 기본이므로 <code>사용자 정의 생성자는 만들지 않는 것이 좋습니다- (default 생성자가 만들어지도록) </code>
   기본 생성자: DTO에 사용자 정의 생성자만 있을 경우 MyBatis가 객체를 생성하지 못하므로 @NoArgsConstructor를 반드시 확인하세요.
- ```java
+```java
  package com.ssafy.mybatis.entity;
 
 //Dto : Data Transfer Object
@@ -184,7 +184,6 @@ public class GuestBook {
 5.  역할: MyBatis 라이브러리가 이 인터페이스를 참조하여 실제 DB 쿼리 동작을 수행합니다.
 
 ```java 
-
 package com.ssafy.mybatis.mapper;
 
 import com.ssafy.mybatis.entity.GuestBook;
@@ -194,6 +193,7 @@ public interface GuestBookRepo {//==dao ==mapper==repository
     public GuestBook selectGuestBook(int articleno);
 
 }
+```
 
 # GuestBook.xml
 ```xml
