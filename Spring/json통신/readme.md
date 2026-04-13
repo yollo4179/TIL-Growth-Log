@@ -29,24 +29,7 @@
 @PutMapping("/blog/{id}")   // 수정(갱신)
 @DeleteMapping("/blog/{id}") // 삭제
 ```
-<table border="1" style="border-collapse: collapse; width: 100%;">
-  <thead>
-    <tr style="background-color: #f8f9fa;">
-      <th>작업</th>
-      <th>기존 방식</th>
-      <th>REST 방식</th>
-      <th>비고</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Create</td>
-      <td>POST /write.do</td>
-      <td>POST /blog/gildong</td>
-      <td>쓰기</td>
-    </tr>
-    </tbody>
-</table>
+<table><thead><tr><th>작업</th><th>기존 방식</th><th>REST 방식</th><th>비고</th></tr></thead><tbody><tr><td>Create (Insert)</td><td>POST /write.do</td><td>POST /blog/gildong</td><td>쓰기</td></tr>...</tbody></table>
 <table border="1" style="border-collapse: collapse; width: 100%;">
   <thead>
     <tr style="background-color: #f8f9fa;">
