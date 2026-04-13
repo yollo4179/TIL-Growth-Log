@@ -243,15 +243,7 @@ HTTP Response 생성 후 전송
 # 기본 REST API 구현 예시
 
 <table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Path</th>
-      <th>Request Body</th>
-      <th>Response</th>
-      <th>설명</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Method</th><th>Path</th><th>Request Body</th><th>Response</th><th>설명</th></tr></thead>
   <tbody>
     <tr>
       <td><b>GET</b></td>
@@ -305,7 +297,7 @@ public interface UserDao {
 
 ## 매퍼.xml 파일 쿼리 작성 ,id는 userList()
 
-'''xml
+```xml
 <mapper namespace="com.ssafy.rest.dao.UserDao">
 
     <select id="userList" resultType="memberDto">
