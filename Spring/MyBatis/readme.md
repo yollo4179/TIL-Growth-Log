@@ -277,39 +277,48 @@ public class HomeController {
     mybatis.configuration.map-underscore-to-camel-case=true
 ```
 
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f8f9fa;">
+    <th style="padding: 10px; text-align: left;"> <strong> Connection Pool</strong>strong></th>
+  </tr>
+  <tr>
+    <td style="padding: 20px; line-height: 1.8;">
 
-- Connection Pool
   
-DB Connection을 내가 만들어야 할까? 그리고, connection관리는 누가 해야 할까?
+DB Connection을 내가 만들어야 할까? 그리고, connection관리는 누가 해야 할까?<br>
 
-Spring Boot에서는 default connection pool로 HikariCP가 사용되며
+Spring Boot에서는 default connection pool로 HikariCP가 사용되며<br>
 
-Tomcat JDBC Connection Pool
+Tomcat JDBC Connection Pool<br>
 
-Commons DBCP2
+Commons DBCP2<br>
 
-Spring Framework SimpleDriverDataSource
+Spring Framework SimpleDriverDataSource<br>
 
-등으로도 교체 가능하다.
+등으로도 교체 가능하다.<br>
 
-mybatis를 사용하기 위해서 mybatis-spring-boot-starter에 의존성을 주었다면, default로 HikariCP가 사용된다.
+mybatis를 사용하기 위해서 mybatis-spring-boot-starter에 의존성을 주었다면, default로 HikariCP가 사용된다.<br>
 
-2. 핵심 개념 이해하기
-왜 커넥션 풀을 쓰나요?
-매번 사용자가 요청을 보낼 때마다 DB와 연결(Connection)을 새로 맺는 과정은 비용이 매우 큽니다. (TCP/IP 핸드셰이크 등)
+2. 핵심 개념 이해하기<br>
+왜 커넥션 풀을 쓰나요❓<br>
+매번 사용자가 요청을 보낼 때마다 DB와 <strong>연결(Connection)</strong>을 새로 맺는 과정은 비용이 매우 큽니다. (TCP/IP 핸드셰이크 등)<br>
 
-비유: 손님이 올 때마다 정수기 배관을 새로 깔고 물을 주는 게 아니라, 미리 물통에 물을 채워두고(Pool) 손님이 오면 컵에 따라주는 방식입니다.
+비유: 손님이 올 때마다 정수기 배관을 새로 깔고 물을 주는 게 아니라, 미리 물통에 물을 채워두고(Pool) 손님이 오면 컵에 따라주는 방식입니다.<br>
 
-장점: 응답 속도가 빨라지고, 시스템 자원을 효율적으로 관리할 수 있습니다.
+장점: 응답 속도가 빨라지고, 시스템 자원을 효율적으로 관리할 수 있습니다.<br>
 
 
-**HikariCP(Connection Pool)**는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.(미리 만들어 놓고<code>풀링과 재사용</code>>)
+**HikariCP(Connection Pool)**는 이 Connection 객체들을 미리 여러 개 만들어두고 관리하는 '보관함' 역할을 합니다.(미리 만들어 놓고<code>풀링과 재사용</code>>)<br>
 
-커넥션(Connection): DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.
+커넥션(Connection): DB와 데이터를 주고받기 위한 통로입니다. 이미지 설정의 maximum-pool-size=10은 이 통로를 최대 10개까지 유지하겠다는 뜻입니다.<br>
 
-ResultSet과의 차이: ResultSet은 쿼리 실행 결과(데이터)를 담고 있는 객체이므로 커넥션과는 다릅니다. 커넥션이 **'통로'**라면, ResultSet은 그 통로를 통해 가져온 **'화물'**이라고 이해하시면 됩니다.
+ResultSet과의 차이: ResultSet은 쿼리 실행 결과(데이터)를 담고 있는 객체이므로 커넥션과는 다릅니다. 커넥션이 **'통로'**라면, ResultSet은 그 통로를 통해 가져온 **'화물'**이라고 이해하시면 됩니다.<br>
 
-히카리풀 없어도 되나요? (성능 vs 필수)
-필수는 아닙니다: 히카리풀이 없어도 DriverManager를 써서 매번 연결을 맺고 끊으며 DB를 사용할 수는 있습니다. (순수 JDBC 방식)
+히카리풀 없어도 되나요❓ (성능 vs 필수)<br>
+필수는 아닙니다: 히카리풀이 없어도 DriverManager를 써서 매번 연결을 맺고 끊으며 DB를 사용할 수는 있습니다. (순수 JDBC 방식)<br>
 
-하지만 실무에서는 필수입니다: 말씀하신 대로 '압도적으로 빨라서' 사용합니다. 커넥션 풀이 없으면 사용자 100명이 동시에 접속했을 때 DB가 연결을 맺느라 비명을 지르며 서버가 멈출 수도 있습니다. 히카리풀은 이 연결을 미리 10개(기본값) 정도 만들어두고 돌려막기(?)를 함으로써 서버 부하를 엄청나게 줄여줍니다.
+하지만 실무에서는 필수입니다: 말씀하신 대로 '압도적으로 빨라서' 사용합니다. 커넥션 풀이 없으면 사용자 100명이 동시에 접속했을 때 DB가 연결을 맺느라 비명을 지르며 서버가 멈출 수도 있습니다. <br>
+히카리풀은 이 연결을 미리 10개(기본값) 정도 만들어두고 돌려막기(?)를 함으로써 서버 부하를 엄청나게 줄여줍니다.<br>
+</td>
+</tr>
+</table>
