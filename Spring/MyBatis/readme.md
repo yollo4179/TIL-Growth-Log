@@ -210,7 +210,7 @@ public interface GuestBookRepo {//==dao ==mapper==repository
 </mapper>
 ```
 
-7. namespace: XML의 &gt mapper namespace="..." &lt 값은 반드시 **인터페이스의 전체 경로(패키지 포함)**와 일치해야 합니다.
+7. namespace: XML의 &gt; mapper namespace="..." &lt; 값은 반드시 **인터페이스의 전체 경로(패키지 포함)**와 일치해야 합니다.
 
 8. id: <select id="...">의 값은 인터페이스의 메서드 이름과 동일해야 합니다.
 
