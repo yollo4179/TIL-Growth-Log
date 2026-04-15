@@ -281,7 +281,7 @@ public class GlobalExceptionHandler2 {
 1. <strong>(브라우저) 쿠키</strong>: 웹사이트 접속 시 서버가 브라우저로 보내는 작은 데이터 파일입니다. 방문자를 식별하고 상태를 기억하는 역할을 합니다. <br>
 
 <table>
-<thrad><tr> <th> *저장 위치</th><th> *내용</th><th> *유형</th> <th> 주요 목적</th></tr><thrad><tbody>
+<thrad><tr> <th> 저장 위치</th> <th> 내용</th><th> *유형</th> <th> 주요 목적</th></tr><thrad><tbody>
 <tr><td> 사용자의 로컬 컴퓨터나 모바일 장치에 저장됩니다.</tr><td>
 <tr><td> 사용자 ID, 설정, 방문 기록 등 텍스트 기반의 정보가 담겨 있습니다..</tr><td>
 <tr><td> 브라우저 종료 시 삭제되는 세션 쿠키, 만료일이 있는 지속적 쿠키로 나뉩니다.</tr><td>
