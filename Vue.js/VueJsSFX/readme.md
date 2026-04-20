@@ -109,4 +109,7 @@ v-for는  `alias in expression`형식의 특수 구문을 사용하여<br>
  </script>
 
  ```
+동일한 요소에 v-for, v-if를 함께 사용하지 않는 것이 좋다 . 
 
+동일한 요소에 v-if, v0for보다 우선순위가 더 높다 .
+v-if조건은 v-for 범위에 접그ㄴ할 수 있습니다.
