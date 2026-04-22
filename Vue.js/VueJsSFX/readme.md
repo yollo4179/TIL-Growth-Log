@@ -324,13 +324,24 @@ onUnmounted : Vue 인스턴스가 파괴된 후 호출
 
 # `Single-File Component(SFC)`
 
-컴포넌트의 템플릿, 로직 및 스타일을 하나의 파일로 묶어낸 특수한 파일 형식(*.vue 파일)
+컴포넌트의 템플릿, 로직 및 스타일을 하나의 파일로 묶어낸 특수한 파일 형식`(*.vue 파일)`
 
 이미지에 있는 텍스트와 코드를 추출한 내용입니다.
 
 Vue SFC는 HTML, CSS 및 JavaScript 3개를 하나로 합친 것
 
-&lt;script&gt;, &lt;template&gt; 및 &lt;style&gt;블록은 하나의 파일에서 컴포넌트의 뷰, 로직 및 스타일을 캡슐화하고 배치
+&lt;script&gt;, &lt;template&gt; 및 &lt;style&gt;블록은 `하나의 파일`에서 컴포넌트의 `뷰, 로직 및 스타일`을 `캡슐화`하고 배치
+
+
+# `<Template>` <br>
+
+각 *.vue 파일은 최상위 `<template>` 블록을 `하나만` 포함할 수 잇음 <br> 
+
+# `<style scope>` <br>
+
+*.vue 파일에는 여러 `<style>`태그가 포함될 수 있음<br>
+ scope가 지정되면 css는 혀재 컴포넌트에만 적용<br>
+
 
 ```html
 <script setup>
@@ -389,29 +400,249 @@ const msg = ref('Hello World!')
     </tbody>
 </table>
 
-```html
-컴포넌트 사용하기
-실시간 코드 테스트: https://play.vuejs.org/ 에서 별도의 설정 없이 Vue 컴포넌트 코드를 작성하고 결과를 미리 볼 수 있습니다.
+<hr>
+컴포넌트 사용하기<br>
+실시간 코드 테스트: https://play.vuejs.org/ 에서 별도의 설정 없이 Vue 컴포넌트 코드를 작성하고 결과를 미리 볼 수 있습니다.<br>
 
-컴파일 및 빌드: Vue SFC(Single File Component)는 브라우저가 직접 이해할 수 없으므로, 컴파일러를 통해 변환된 후 빌드 과정을 거쳐야 합니다.
+컴파일 및 빌드: `Vue SFC`(Single File Component)는 `브라우저가 직접 이해할 수 없`으므로,<br> `컴파일러를 통해 변환된 후 빌드 과정`을 거쳐야 합니다.<br>
 
-빌드 도구: 실제 프로젝트 환경에서는 일반적으로 SFC 컴파일러를 포함한 Vite와 같은 공식 빌드 도구를 사용하여 개발 및 배포를 진행합니다.
+빌드 도구: 실제 프로젝트 환경에서는 일반적으로 `SFC 컴파일러를 포함한 Vite`와 같은 공식 빌드 도구를 <br>사용하여 개발 및 배포를 진행합니다.<br>
 
 요약 및 팁
-Vue의 SFC 방식은 개발자에게는 직관적인 구조를 제공하지만, 최종적으로는 브라우저가 읽을 수 있는 표준 JavaScript와 CSS로 변환되는 과정이 필요합니다. 이를 위해 Vite는 매우 빠른 핫 모듈 교체(HMR) 기능을 제공하여 현대적인 Vue 개발의 표준이 되었습니다.
+Vue의 SFC 방식은 개발자에게는 직관적인 구조를 제공하지만, 최종적으로는 브라우저가 읽을 수 있는 표준 <br>`JavaScript와 CSS로 변환되는 과정`이 `필요`합니다. 이를 위해 `Vite`는 매우 빠른 `핫 모듈 교체`<br>(HMR) 기능을 제공하여 현대적인 Vue 개발의 표준이 되었습니다.<br>
 
-`Node.js의 역할`
-JavaScript의 실행 환경 확장
+`Node.js의 역할`<br>
 
-기존에 브라우저 안에서만 동작할 수 있었던 JavaScript를 브라우저가 아닌 서버 측에서도 실행할 수 있게 함
+JavaScript의 실행 환경 확장<br>
 
-이를 통해 프론트엔드와 백엔드에서 동일한 언어로 개발할 수 있는 환경이 조성됨
+기존에 브라우저 안에서만 동작할 수 있었던 JavaScript를 브라우저가 아닌 `서버 측에서도 실행`할 수 있게 함<br>
 
-NPM(Node Package Manager) 생태계
+이를 통해 프론트엔드와 백엔드에서 동일한 언어로 개발할 수 있는 환경이 조성됨<br>
+<hr>
+NPM(Node Package Manager) 생태계<br>
 
-NPM을 활용해 수많은 오픈 소스 패키지와 라이브러리를 제공
+`NPM`을 활용해 수많은 `오픈 소스 패키지`와 `라이브러리`를` 제공<br>
 
-개발자들이 손쉽게 코드를 공유하고 재사용할 수 있게 하여 개발 생산성을 높임
+개발자들이 손쉽게 코드를 공유하고 재사용할 수 있게 하여 개발 생산성을 높임<br>
 
-Node.js는 단순히 서버를 만드는 도구를 넘어, 앞서 살펴본 Vue SFC의 빌드 및 컴파일 과정(Vite 등)을 처리하는 핵심 엔진 역할도 수행합니다.
+`Node.js`는 단순히 서버를 만드는 도구를 넘어,<br> 앞서 살펴본 `Vue SFC의 빌드 및 컴파일 과정`(Vite 등)을 `처리`하는 핵심 엔진 역할도 수행합니다.<br>
+
+<hr>
+
+`Vite 프로젝트` 생성하기<br>
+프론트 엔드 개발 도구 <br>
+```cmd
+ npm create vue@latest
+ 
 ```
+![alt text](image-5.png)
+```cmd
+npm run dev
+```
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+
+
+<hr>
+
+# `node_modules`
+
+1. Node.js 프로젝트에서 사용되는 외부 패키지들이 저장되는 디렉토리<br>
+2. 프로젝트의 의존성 모듈을 저장하고 관리하는 공간<br>
+3. 프로젝트가 실행될 때 필요한 라이브러리와 패키지들을 포함 <br>
+4. .gitignore에 작성됨<br>
+
+![alt text](image-8.png)
+
+<hr>
+
+# `Packge-lock.json`
+
+패키지들의 실제 설치 버전,의존성 관계, 하위 패키지 등을 포함하여 
+패키지 설치에 필요한 모든 정보를 포함<br>
+
+패키지들의 `정확한 버전을 보장`하여, `여러 개발자가 협업`하거나 서버 환경에서 `일관성있는 의존성`을 유지하는데 도움을 줌. <br>
+
+`npm install` 명령을 통해 `패키지를 설치`할 때, `명시된 버전과 의존성을 기반으로 설치`.<br>
+
+![alt text](image-13.png)
+<hr>
+
+# `package.json`
+
+프로젝트의 매타 정보 및 의존성 패키지 목록 포함<br>
+
+프로젝트의 이름 ,버전 ,작성자 ,라이선스 같은 메타 정보 포함<br>
+
+package-lock.json과 함께 `프로젝트의 의존성을 관리`하고, `버전 충돌 및 일관성을 유지`합니다.
+![alt text](image-12.png)
+<hr>
+
+# public 디렉토리
+주로 정적 파일을 위치시킨다.<br>
+- 소스코드에서 참조되지 않는 
+-항상 같은 이름을 갖는
+- import할 필요 없는 
+* 항상 root 절대 경로를 사용하여 참조 
+- public/icn.png는 소스코드에서 /icon.png로 참조할 수 있음
+![alt text](image-11.png)
+
+# src 디렉토리 
+
+프로젝트의 주요 소스 코드를 포함하는 곳 <br>
+
+컴포넌트, 스타일 , 라우팅 등 프로젝트의 핵심 코드를 관리 <br>
+![alt text](image-10.png)
+
+# src/assets 
+
+프로젝트 내에서 사용되는 자원( 이미지, 폰트, 스타일 시트 등)을 관리<br>
+
+컴포넌트 자체에서 참조하는 내부 파일을 저장하는데 사용 <br>
+
+컴포넌트가 아닌 곳에서는 `public 디렉토리`에 `위치한 파일을 사용` <br>
+
+![alt text](image-9.png)
+
+# src/components 
+
+Vue 컴포넌트들을 작성하는 곳 <br>
+
+![alt text](image-14.png)
+
+# src/App.vue
+
+- vue 앱의 최상위 Root 컴포넌트 
+- 다른 하위 컴포넌트들을 포함
+- 애플리케이션 전체의 레이아웃과 공통적인 요소를 정의
+
+![alt text](image-15.png)
+![alt text](image-16.png)
+
+# src/main.js
+
+- Vue 인스턴스를 생성하고 애플리케이션을 초기화
+-`필요한 라이브러리를 import`하고 `전역 설정`을 수행
+
+
+# index.html
+Vue 앱의 기본 HTML 파일<br>
+
+`앱의 진입점` (entry point)<br>
+
+`Root 컴포넌트`인 App.vue가 해당 페이지에 `마운트(mount) 됨.` Vue 앱이 SPA인 이유<br>
+
+필요한 스타일 시트, 스크립트 등의 외부 리소스를 로드 할 수 있음 (ex. bootstrap CDN)<br>
+
+
+# 컴포넌트 사용하기
+
+```html
+<!--App.vue -->
+
+<template>
+  <h1>App.vue</h1>
+  <MyComponent />
+</template>
+
+<script setup>
+// import MyComponent from './components/MyComponent.vue'
+import MyComponent from '@/components/MyComponent.vue'
+</script>
+```
+App(부모) - MyComponent(자식) 관계 형성<br>
+@ = src/를 뜻하는 약어입니다<br>
+
+
+```html
+
+<!--MyComponent.vue -->
+<template>
+  <div>
+    <h2>MyComponent</h2>
+    <MyComponentItem />
+    <MyComponentItem />
+    <MyComponentItem />
+  </div>
+</template>
+
+<script setup>
+import MyComponentItem from '@/components/MyComponentItem.vue'
+</script>
+
+```
+
+```html
+
+<!--MyComponentItem.vue -->
+<template>
+  <p>MyComponentItem</p>
+</template>
+```
+
+![alt text](image-17.png)
+
+# Composition API
+import해서 가져온 API 함수들을 사용하여 컴포넌트의 로직을 정의<br>
+
+Vue3 에서의 권장 방식<br>
+
+```html
+<template>
+  <button @click="increment">{{ count }}</button>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const count = ref(0)
+
+function increment() {
+  count.value++
+}
+
+onMounted(() => {
+  console.log(`숫자 세기의 초기값은 ${ count.value }`)
+})
+</script>
+```
+
+# Option API
+data, methods 및 mounted 같은 객체를 사용하여 컴포넌트의 로직을 정의<br>
+
+Vue2 에서의 작성 방식<br>
+```html
+<template>
+  <button @click="increment">{{ count }}</button>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  },
+
+  methods: {
+    increment() {
+      this.count++
+    }
+  },
+
+  mounted() {
+    console.log(`숫자 세기의 초기값은 ${ this.count }`)
+  }
+}
+</script>
+```
+
+- Composition API + SFC
+
+- 규모가 있는 앱의 전체를 구축하려는 경우
+
+- Option API
+
+- 빌드 도구를 사용하지 않거나 복잡성이 낮은 프로젝트에서 사용하려는 경우
