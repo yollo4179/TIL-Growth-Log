@@ -272,6 +272,27 @@ startActivity(intent)
 
 # Permission
 
+
+| 권한 종류 | 설명 | 특징 |
+| :--- | :--- | :--- |
+| **Install time permissions** | 앱 설치 시점에 권한이 부여됩니다. | 플레이스토어에 명시되며, 설치 시 권한 선언 필요(인터넷 권한) |
+| **Runtime Permissions** | 앱 실행 중에 사용자에게 직접 허가를 받아야 합니다. | **코드상으로 구현(Check & Request)**해야 함(주소록 접근, 카메라, 비디오,위치정보 등 개인정보) |
+| **Special Permissions** | 시스템 수준의 민감한 권한입니다. | 플랫폼(Android)과 OEM만이 정의할 수 있음 |
+
+
+## 권한 요청 (AndroidManifest.xml)
+안드로이드 앱에서 특정 기능(위치, 카메라 등)을 사용하려면 가장 먼저 AndroidManifest.xml 파일에 사용하고자 하는 권한을 선언해야 합니다.
+```xml
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+ACCESS_COARSE_LOCATION: 대략적인 위치 권한 (와이파이나 기지국 기반)
+
+ACCESS_FINE_LOCATION: 정밀한 위치 권한 (GPS 기반)
+
+위치 정보는 민감한 권한이기 때문에 매니페스트에 선언하는 것만으로는 부족합니다. 반드시 앱 실행 중에 사용자가 "허용"을 눌러야 실제 데이터를 가져올 수 있어요!
+```
+
 # Task 
 
 # Activity 실행모드 
