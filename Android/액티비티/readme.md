@@ -18,6 +18,9 @@
 뷰는 여러 개가 모여 화면을 구성하는데, 이를 관리하는 것이 ViewGroup입니다.
 레이아웃(Layout): `ConstraintLayout, LinearLayout` 등이 대표적인 뷰 그룹입니다.
 
+Measure (측정): 뷰가 "나는 이 정도 크기가 필요해"라고 자신의 사이즈를 결정하는 단계입니다.
+
+
 ```
 
 # 인텐트 
