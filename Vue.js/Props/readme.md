@@ -347,10 +347,119 @@ Vue 컴포넌트는 이미 반응형 상태를 관리하고 있다. <br>
 ![alt text](image-6.png)
 
 <h3>해결(전역 매니저)</h3>
-각 컴포넌트에서 이벤트는 mitt로 이벤트를 전송하고 mitt에서 관리한다.
-Mitt는 이벤트를 수신하고 송신하는 Event Bus 역할을 한다. 
+각 컴포넌트에서 이벤트는 mitt로 이벤트를 전송하고 mitt에서 관리한다.<br>
+Mitt는 이벤트를 수신하고 송신하는 Event Bus 역할을 한다. <br>
+
+`사실 그냥 발행 구독 패턴의 싱글톤 객체임`
+
+```xml
+1.  mitt() 함수를 호출하여 emitter(이벤트를 관리하는 객체)를 생성합니다.
+
+2. emitter.on('이벤트명', 콜백함수): 특정 이벤트를 수신(Listen)하고, 이벤트가 발생하면 함수를 실행합니다.
+
+3. emitter.emit('이벤트명', 데이터): 특정 이벤트를 발송(Fire)합니다. 같이 보낼 데이터가 있다면 함께 담아 보낼 수 있습니다.
+
+4. emitter.off('이벤트명', 함수): 더 이상 이벤트를 듣지 않도록 수신을 해제합니다.
+
+```
 
 
+1. Mitt 기본 사용법 (기초)
+라이브러리의 기본적인 동작 원리를 보여주는 코드입니다.
 
 
+```javascript
 
+import mitt from 'mitt'
+
+const emitter = mitt()
+
+// foo 이벤트 수신,람다
+emitter.on('foo', e => console.log('foo', e)) ->  {a:'b'}
+
+// 모든 이벤트 수신 (*), 람다
+emitter.on('*', (type, e) => console.log(type, e)) -> 'foo', { a: 'b' }
+
+// 이벤트 발송 (데이터 전달 가능) foo 이벤트 -> 인자는 a:'b'
+emitter.emit('foo', { a: 'b' })
+
+// 등록된 모든 이벤트 삭제
+emitter.all.clear()
+
+// 핸들러 참조를 사용한 수신 및 해제
+function onFoo() {}
+emitter.on('foo', onFoo)  // 수신 시작
+emitter.off('foo', onFoo) // 수신 해제
+
+```
+
+2. 프로젝트 전역 설정 (main.js)
+앱 전체에서 공유할 수 있도록 provide를 사용하는 설정입니다.
+```javascript
+
+// main.js
+import { createApp } from 'vue'
+import App from './App.vue'
+import mitt from 'mitt'
+
+const app = createApp(App)
+
+// emitter 생성 및 전역 provide 설정
+const emitter = mitt();
+app.provide('emitter', emitter); // 'emitter'라는 이름의 방송국(발행 구독) 객체 생성 
+
+app.mount('#app')
+```
+
+3. 이벤트 수신 측 (Parent.vue 등)
+inject로 가져온 emitter를 생명주기에 맞춰 등록하고 해제하는 코드입니다.
+
+```html
+<script setup>
+import { inject, onMounted, onUnmounted } from 'vue'
+
+// 전역 emitter 주입
+const emitter = inject('emitter'); // 생성한 'emitter' 방송국(발행 구독) 객체 사용한다고 선언
+
+// 이벤트 발생 시 실행할 콜백 함수
+const someCallback = (data) => {
+  console.log('이벤트 수신됨:', data);
+};
+
+onMounted(() => {
+   컴포넌트가 마운트될 때 `이벤트` 리스너 `등록`
+  emitter.on("someEvent", someCallback)
+})
+
+onUnmounted(() => {
+   컴포넌트가 해제될 때 반드시 `리스너 제거`
+  emitter.off("someEvent", someCallback)
+})
+</script>
+
+```
+
+4. 이벤트 발송 측
+컴포넌트 통신을 위해 이벤트를 발생시키는 코드입니다.
+
+```html
+<script setup>
+import { inject } from 'vue'
+
+const emitter = inject('emitter');
+
+// 기존의 defineEmits 선언 없이도 사용 가능합니다.
+// const emit = defineEmits(['someEvent', 'emitArgs'])
+
+// 단순 이벤트 발송
+const buttonClick = function () {
+  emitter.emit('someEvent')
+}
+
+// 데이터를 담아서 이벤트 발송
+const emitArgs = function () {
+  emitter.emit('emitArgs', [1, 2, 3])
+}
+</script>
+
+```
